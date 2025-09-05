@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { Button } from "../../components/Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { User } from "../../models/User";
 import { getUsersFromDB, newUser } from "../../services/userService";
 
@@ -16,10 +16,9 @@ export default function Users() {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
 
-
     const getUsers = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
             const data = await getUsersFromDB();
             setUsers(data);
             console.log(users);
@@ -36,8 +35,8 @@ export default function Users() {
             alert('Please fill all fields');
             return;
         }
+        setLoading(true);
         try {
-            setLoading(true);
             await newUser(user);
         } catch (error) {
             setLoading(false);
@@ -49,6 +48,12 @@ export default function Users() {
         }
     }
 
+    // useEffect() forma parte de React Hooks, se usa para ejecutar código cuando el componente se monta, se actualiza o se desmonta
+    // COMO EL ngOnINIT DE ANGULAR
+    useEffect(() => {
+        getUsers();
+    }, []);
+    
     return <div>
         <h1>Users Page</h1>
         <Button text="Go to main page" action={goToMainPage}></Button>

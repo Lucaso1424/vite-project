@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../../models/Product";
 import { getProducts } from "../../services/productService";
 import { Button } from "../../components/Button/Button";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
     const goToMainPage = () => {
         navigate('/');
@@ -27,6 +28,11 @@ export function Products() {
             setLoading(false);
         }
     }
+
+    
+    useEffect(() => {
+        getProductsFromDB();
+    }, []);
 
     return <div>
         <h1>Products Page</h1>
