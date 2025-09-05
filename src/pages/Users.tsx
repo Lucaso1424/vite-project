@@ -30,10 +30,9 @@ export default function Users() {
         <Button text="Go to main page" action={goToMainPage}></Button>
         <Button text="Get Users" action={getUsers}></Button>
         {loading ? <p>Loading...</p> : ''}
-        {users.length == 0 && !loading ? <p>No users</p>: ''}
         {users.map((user, index) => 
             <div key={index}>
-                {user.name}  - {user.lastName} - {user.email} - {user.roleDisplayName} - Active: {user.isActive ? 'Yes' : 'No'}
+                {user.name} {user.lastName}, {user.email} - {user.roleDisplayName} - Active: {user.isActive ? 'Yes' : 'No'}
             </div>
         )}
     </div>

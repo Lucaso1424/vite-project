@@ -9,7 +9,7 @@ export function ArrayCards({list}: {list: User[]}) {
                 <button onClick={() => alert(`User: ${item.name}, ${item.lastName}, Email: ${item.email}, - Active: ${item.isActive == true ? 'Yes' : 'No'}`)}>Show Info</button>
             </div>)
         }
-        <p>Total items: {list.length ?? 0}</p>
+        <p>{list.length > 0 ? 'Total users: ' + list.length : 'No users'}</p>
     </div>
 }
 

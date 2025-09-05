@@ -19,7 +19,7 @@ export default function App() {
       name: 'Mariluz', isActive: true,
       userId: 1,
       lastName: 'Padilla',
-      email: 'mariluzpadilla111ç@gmail.com',
+      email: 'example@gmail.com',
       roleId: 2,
       roleDisplayName: ''
     },
@@ -27,7 +27,23 @@ export default function App() {
       name: 'Mario', isActive: true,
       userId: 0,
       lastName: 'Ordóñez Hidalgo',
-      email: 'maorsoco@gmail.com',
+      email: 'example@gmail.com',
+      roleId: 3,
+      roleDisplayName: ''
+    },
+    {
+      name: 'Mario', isActive: true,
+      userId: 0,
+      lastName: 'Ordóñez Sobrado',
+      email: 'example@gmail.com',
+      roleId: 3,
+      roleDisplayName: ''
+    },
+    {
+      name: 'Eva', isActive: true,
+      userId: 0,
+      lastName: 'Jiménez Villalobos',
+      email: 'example@gmail.com',
       roleId: 3,
       roleDisplayName: ''
     },
@@ -50,39 +66,34 @@ export default function App() {
     navigate('/users');
   }
 
+  const goToStore = () => {
+    navigate('/store');
+  }
+
   return (
     <section className='App'>
-      <h1>Twitter Cards</h1>
+      <h1>Generic Store</h1>
       <TwitterCard 
         name='Lucas Padilla Hidalgo' 
         userName='Lucaso1424' 
         position='Software Engineer'
         avatarUrl='Lucaso1424'/>
 
-      <TwitterCard 
-        name='Mariluz Padilla Hidalgo' 
-        userName='Mariluz19032000' 
-        position='Lawyer'/>
-
-      <TwitterCard 
-        name='Miguel Ángel Durán García' 
-        userName='midudev' 
-        position='Senior Software Engineer'
-        avatarUrl='midudev'/>
-
-      <h2>Family</h2>
+      <h2>My Family</h2>
       <ArrayCards
         list={family} />
 
       <Button 
-        text='navigate to products page'
+        text='Products page'
         action={goToProducts}/>
 
       <Button 
-        text='navigate to users page'
+        text='Users page'
         action={goToUsers}/>
-
-        {/* RUTAS PARA NAVEGAR ENTRE PAGES */}
+        
+      <Button 
+        text='Store page'
+        action={goToStore}/>
     </section>
   )
 }
