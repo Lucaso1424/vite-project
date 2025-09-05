@@ -12,10 +12,10 @@ export async function getUsersFromDB(): Promise<User[]> {
     return data;
 }
 
-export async function newUser(users: User[]): Promise<void> {
+export async function newUser(user: User): Promise<void> {
     const request = await fetch(appSettings.apiUrl + "User", {
         method: 'POST',
-        body: JSON.stringify(users),
+        body: JSON.stringify(user),
         headers: {
             'Content-Type': 'application/json'
         }

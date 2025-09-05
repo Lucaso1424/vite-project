@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button/Button";
 import { useState } from "react";
 import type { User } from "../models/User";
-import { getUsersFromDB } from "../services/userService";
+import { getUsersFromDB, newUser } from "../services/userService";
 
 export default function Users() {
     const [users, setUsers] = useState<User[]>([]);
@@ -21,6 +21,25 @@ export default function Users() {
             setLoading(false);
         }
     }
+
+    const createNewUser = async (user: User) => {
+        if (user.name.trim() === '' || user.lastName.trim() === '' || user.email.trim() === '') {
+            alert('Please fill all fields');
+            return;
+        }
+        try {
+            setLoading(true);
+            await newUser(user);
+        } catch (error) {
+            setLoading(false);
+            console.error(error);
+        } finally {
+
+            await getUsers();
+            setLoading(false);
+        }
+    }
+
     const navigate = useNavigate();
     const goToMainPage = () => {
         navigate('/');
@@ -35,5 +54,31 @@ export default function Users() {
                 {user.name} {user.lastName}, {user.email} - {user.roleDisplayName} - Active: {user.isActive ? 'Yes' : 'No'}
             </div>
         )}
-    </div>
+        <h2>New User</h2>
+        <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" name="name" />
+
+            <label htmlFor="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" />
+
+            <label htmlFor="email">Email</label>
+            <input type="text" id="email" name="email" />
+            <Button text="Create User" action={() => {
+                const name = (document.getElementById('name') as HTMLInputElement).value;
+                const lastName = (document.getElementById('lastName') as HTMLInputElement).value;
+                const email = (document.getElementById('email') as HTMLInputElement).value;
+                const user: User = {
+                    name,
+                    lastName,
+                    email,
+                    roleId: 9,
+                    roleDisplayName: 'Customer',
+                    isActive: true,
+                    trackingState: 'Added'
+                };
+                createNewUser(user);
+            }}></Button>
+        </div> 
+    </div> 
 }

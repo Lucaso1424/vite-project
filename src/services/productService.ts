@@ -17,7 +17,7 @@ export async function newProduct(product: Product): Promise<void> {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
-      }
+      },
     });
     await response.json();
 }
