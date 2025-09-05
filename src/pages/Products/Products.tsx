@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { Product } from "../models/Product";
-import { getProducts } from "../services/productService";
-import { Button } from "../components/Button/Button";
+import type { Product } from "../../models/Product";
+import { getProducts } from "../../services/productService";
+import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 export function Products() {

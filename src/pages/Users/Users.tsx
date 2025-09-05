@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../components/Button/Button";
+import { Button } from "../../components/Button/Button";
 import { useState } from "react";
-import type { User } from "../models/User";
-import { getUsersFromDB, newUser } from "../services/userService";
+import type { User } from "../../models/User";
+import { getUsersFromDB, newUser } from "../../services/userService";
 
 export default function Users() {
+    const navigate = useNavigate();
+    const goToMainPage = () => {
+        navigate('/');
+    }
+    const goToDetail = () => {
+        navigate('/userDetail');
+    }
+
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
+
 
     const getUsers = async () => {
         try {
@@ -40,10 +49,6 @@ export default function Users() {
         }
     }
 
-    const navigate = useNavigate();
-    const goToMainPage = () => {
-        navigate('/');
-    }
     return <div>
         <h1>Users Page</h1>
         <Button text="Go to main page" action={goToMainPage}></Button>
@@ -51,7 +56,8 @@ export default function Users() {
         {loading ? <p>Loading...</p> : ''}
         {users.map((user, index) => 
             <div key={index}>
-                {user.name} {user.lastName}, {user.email} - {user.roleDisplayName} - Active: {user.isActive ? 'Yes' : 'No'}
+                {user.name} {user.lastName}
+                <Button text="Detail" action={goToDetail}></Button>
             </div>
         )}
         <h2>New User</h2>

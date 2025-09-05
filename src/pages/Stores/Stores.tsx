@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { getStoresFromDB } from "../services/storeService";
+import { getStoresFromDB } from "../../services/storeService";
 import { useState } from "react";
-import type { Store } from "../models/Store";
-import { Button } from "../components/Button/Button";
+import type { Store } from "../../models/Store";
+import { Button } from "../../components/Button/Button";
 
 export function Stores() {
     const [stores, setStores] = useState<Store[]>([]);
