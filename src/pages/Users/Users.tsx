@@ -3,15 +3,14 @@ import { Button } from "../../components/Button/Button";
 import { useEffect, useState } from "react";
 import type { User } from "../../models/User";
 import { getUsersFromDB, newUser } from "../../services/userService";
+import ArrayCards from "../../components/ArrayCards/ArrayCards";
 
 export default function Users() {
     const navigate = useNavigate();
     const goToMainPage = () => {
         navigate('/');
     }
-    const goToDetail = () => {
-        navigate('/userDetail');
-    }
+
 
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
@@ -43,7 +42,7 @@ export default function Users() {
             console.error(error);
         } finally {
 
-            await getUsers();
+            await newUser(user);
             setLoading(false);
         }
     }
@@ -59,12 +58,8 @@ export default function Users() {
         <Button text="Go to main page" action={goToMainPage}></Button>
         <Button text="Get Users" action={getUsers}></Button>
         {loading ? <p>Loading...</p> : ''}
-        {users.map((user, index) => 
-            <div key={index}>
-                {user.name} {user.lastName}
-                <Button text="Detail" action={goToDetail}></Button>
-            </div>
-        )}
+        <ArrayCards list={users}>
+        </ArrayCards>
         <h2>New User</h2>
         <div className="form-group">
             <label htmlFor="name">Name</label>

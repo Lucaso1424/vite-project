@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../../models/Product";
-import { getProducts } from "../../services/productService";
+import { deleteProduct, getProducts } from "../../services/productService";
 import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +25,25 @@ export function Products() {
             console.error(error);
         }
         finally {
+            setLoading(false);
+        }
+    }
+
+    const deleteProductById = async (id: number) => {
+        if (id <= 0) {
+            alert('Invalid product id');
+            return;
+        }
+        try {
+            await deleteProduct(id);
+            setLoading(true); 
+        }
+        catch (error) {
+            setLoading(false);
+            console.error(error);
+        }
+        finally {
+            await getProductsFromDB();
             setLoading(false);
         }
     }

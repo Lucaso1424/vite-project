@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/products" element={<Products />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/userDetail" element={<UserDetail name={''} lastName={''} email={''} roleId={0} roleDisplayName={''} isActive={false} />} />
+        <Route path="/userDetail" element={<UserDetail user={undefined}/>} />
         <Route path="/store" element={<Stores />} />
       </Routes>
     </BrowserRouter>

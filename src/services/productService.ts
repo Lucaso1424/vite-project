@@ -22,3 +22,24 @@ export async function newProduct(product: Product): Promise<void> {
     });
     await response.json();
 }
+
+export async function deleteProduct(id: number): Promise<void> {
+    const response = await fetch(appSettings.apiUrl + "Product/" + id,{
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    });
+    await response.json();
+}
+
+export async function updateProduct(product: Product): Promise<void> {
+    const response = await fetch(appSettings.apiUrl + "Product",{
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    });
+    await response.json();
+}

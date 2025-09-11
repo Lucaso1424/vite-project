@@ -22,3 +22,24 @@ export async function newUser(user: User): Promise<void> {
     });
     await request.json();
 }
+
+export async function updateUser(user: User): Promise<void> {
+    const response = await fetch(appSettings.apiUrl + "User", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    });
+    await response.json();
+}
+
+export async function deleteUser(id: number): Promise<void> {
+    const response = await fetch(appSettings.apiUrl + "User/" + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    await response.json();
+}
