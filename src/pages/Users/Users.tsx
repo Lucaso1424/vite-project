@@ -11,7 +11,6 @@ export default function Users() {
         navigate('/');
     }
 
-
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
 

@@ -70,6 +70,15 @@ export default function App() {
     navigate('/store');
   }
 
+  const goToCanvas = () => {
+    navigate('/canvas');
+  }
+
+  const goToRoom = () => {
+    navigate('/room');
+  }
+
+
   return (
     <section className='App'>
       <h1>Generic Store</h1>
@@ -94,6 +103,14 @@ export default function App() {
       <Button 
         text='Store page'
         action={goToStore}/>
+
+      <Button 
+        text='Canvas page'
+        action={goToCanvas}/>
+
+      <Button 
+        text='Room Three.js page'
+        action={goToRoom}/>
     </section>
   )
 }
